@@ -30,7 +30,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://YOUR-VERCEL-DOMAIN.vercel.app"
+        "https://frontend-na92m3b04-unknowns-projects-5f81c6b2.vercel.app/"
     ],
     allow_credentials=True,
     allow_methods=["*"],
