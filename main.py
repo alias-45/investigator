@@ -25,6 +25,17 @@ app.add_middleware(
     + [o.strip() for o in os.getenv("CORS_ORIGINS", "").split(",") if o.strip()],
     allow_credentials=True, allow_methods=["*"], allow_headers=["*"],
 )
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://YOUR-VERCEL-DOMAIN.vercel.app"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Every label has its own primary key. Using one shared list of keys made
 # Evidence/Memory/Task/Action nodes collide with Alert/Incident ids.
@@ -499,14 +510,3 @@ def graph_agent_investigate(req: GraphAgentRequest):
     if not rows:
         raise HTTPException(404, detail={"code": "unknown_entity", "message": f"Incident {iid} is not present in the current graph."})
     return agents.graph_tool_agent(iid, req.prompt, execute_tool, max_steps=req.max_steps)
-from fastapi.middleware.cors import CORSMiddleware
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "https://YOUR-VERCEL-DOMAIN.vercel.app"
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
