@@ -499,3 +499,14 @@ def graph_agent_investigate(req: GraphAgentRequest):
     if not rows:
         raise HTTPException(404, detail={"code": "unknown_entity", "message": f"Incident {iid} is not present in the current graph."})
     return agents.graph_tool_agent(iid, req.prompt, execute_tool, max_steps=req.max_steps)
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://YOUR-VERCEL-DOMAIN.vercel.app"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
