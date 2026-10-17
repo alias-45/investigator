@@ -94,3 +94,8 @@ def plain(v: Any):
 
 
 def nid(label: str, props: dict) -> str:
+    def nid(label: str, props: dict) -> str:
+    key = ID_KEY.get(label)
+    if key and props.get(key) is not None:
+        return str(props[key])
+    return f"{label}:{props.get('id') or props.get('name') or id(props)}"
