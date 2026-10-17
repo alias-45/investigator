@@ -1,0 +1,4 @@
+fastapi>=0.115
+uvicorn[standard]>=0.30
+falkordb>=1.0
+python-dotenv>=1.0
